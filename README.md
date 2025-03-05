@@ -11,7 +11,7 @@ Q:Why are there so many strange functions?
 A:That's an interesting question. This project is seriously being developed as a developer's toy.
 
 # How to build.
-Please install SDL3, imgui, Python3, and Lua via vcpkg.
+Please install SDL3, imgui, and Lua via vcpkg.
 Then run this at the command prompt.
 ```
 cmake . --preset x64-debug

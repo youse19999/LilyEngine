@@ -1,11 +1,23 @@
 #include "main.h"
-#include "lua.h"
 
 int main()
 {
-	load_luafile("lua/entry.lua");
+	//LuaÇ…ä÷êîÇìoò^
+	lua_State* L = init_lua();
+
+	lua_pushcfunction(L, sdl_main_lua);
+	lua_setglobal(L, "SdlMain");
+	lua_pushcfunction(L, sdl_update_lua);
+	lua_setglobal(L, "SdlUpdate");
+	lua_pushcfunction(L, sdl_render_lua);
+	lua_setglobal(L, "SdlRender");
+	lua_pushcfunction(L, sdl_remove_lua);
+	lua_setglobal(L, "SdlRemove");
+
+	load_luafile(L, "lua/entry.lua");
 	return 0;
 }
+
 
 int sdl_main()
 {
