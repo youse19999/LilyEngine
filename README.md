@@ -20,3 +20,6 @@ or
 ```
 cmake . --preset x64-release
 ```
+
+# How to use.
+Create a lua folder in the folder where the executable file is located and write the script in it.

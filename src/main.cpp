@@ -3,7 +3,7 @@
 
 int main()
 {
-	test_lua();
+	load_luafile("lua/entry.lua");
 	return 0;
 }
 

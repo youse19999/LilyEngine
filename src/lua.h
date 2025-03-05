@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <lua.hpp>
 
-int test_lua();
+int load_luafile(char* raw_lua_text);
