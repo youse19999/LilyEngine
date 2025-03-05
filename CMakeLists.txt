@@ -15,27 +15,16 @@ find_package(SDL3 REQUIRED)
 find_package(imgui REQUIRED)
 find_package(Lua REQUIRED)
 
-add_library(LilyEngine "src/main.h" "src/lua_exec.cpp" "src/lua_exec.h")
+add_library(LilyEngine "src/lua_exec.cpp" "src/sdl_render.cpp")
 
-add_library(IMGUIBACKEND ${IMGUI_BACKEND_SOURCES} "src/main.h" "src/lua_exec.cpp" "src/lua_exec.h")
-
-add_executable(Lily "src/main.cpp" "src/lua_exec.cpp" "src/lua_exec.h")
+add_library(IMGUIBACKEND ${IMGUI_BACKEND_SOURCES})
 
 target_include_directories(IMGUIBACKEND PUBLIC imgui::imgui)
 target_link_libraries(IMGUIBACKEND PUBLIC imgui::imgui)
 
-target_include_directories(LilyEngine PUBLIC imgui::imgui)
-target_link_libraries(LilyEngine PUBLIC imgui::imgui)
+target_include_directories(LilyEngine PUBLIC imgui::imgui IMGUIBACKEND SDL3::SDL3  ${LUA_INCLUDE_DIR})
+target_link_libraries(LilyEngine PUBLIC imgui::imgui IMGUIBACKEND SDL3::SDL3  ${LUA_LIBRARIES})
 
-target_include_directories(LilyEngine PUBLIC IMGUIBACKEND)
-target_link_libraries(LilyEngine PUBLIC IMGUIBACKEND)
+add_executable(Lily "src/main.cpp")
 
-target_include_directories(LilyEngine PUBLIC SDL3::SDL3)
-target_link_libraries(LilyEngine PUBLIC SDL3::SDL3)
-
-target_include_directories(LilyEngine PUBLIC ${LUA_INCLUDE_DIR})
-target_link_libraries(LilyEngine PRIVATE ${LUA_LIBRARIES})
-
-
-target_include_directories(Lily PUBLIC LilyEngine)
 target_link_libraries(Lily PUBLIC LilyEngine)
